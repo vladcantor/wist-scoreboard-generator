@@ -1,0 +1,1 @@
+# wist-scoreboard-generator
