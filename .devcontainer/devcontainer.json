@@ -1,0 +1,25 @@
+{
+  "name": "Wist Scoreboard",
+  "build": {
+    "dockerfile": "Dockerfile",
+    // Update 'VARIANT' to pick a Node version: 16, 14, 12.
+    // Append -bullseye or -buster to pin to an OS version.
+    // Use -bullseye variants on local on arm64/Apple Silicon.
+    "args": {
+      "VARIANT": "16-bullseye"
+    }
+  },
+  "settings": {},
+  "extensions": [
+    "nrwl.angular-console",
+    "angular.ng-template",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "firsttris.vscode-jest-runner"
+  ],
+  "forwardPorts": [3000],
+  "remoteUser": "node",
+  "features": {
+    "git": "latest"
+  }
+}
