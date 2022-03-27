@@ -1,4 +1,36 @@
-<input matInput placeholder="New Player" />
-<button mat-fab color="primary">
+<mat-checkbox
+  matInput
+  placeholder="New Player Name"
+  [checked]="(isGameOfOneIncluded$ | async) ?? false"
+  (change)="onIncludeGamesOfOneChanged($event.checked)"
+  >Should Include Games of One?</mat-checkbox
+>
+<mat-form-field appearance="fill">
+  <mat-label>Player Name</mat-label>
+  <input
+    matInput
+    placeholder="New Player Name"
+    #playerName
+    [value]="addedPlayerName$ | async"
+    (input)="onPlayerNameChanged(playerName.value)"
+  />
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Player Symbol</mat-label>
+  <input
+    matInput
+    placeholder="New Player Symbol"
+    #playerSymbol
+    [value]="addedPlayerSymbol$ | async"
+    disabled
+  />
+</mat-form-field>
+<button mat-fab color="primary" (click)="onAddPlayer()">
   <mat-icon>person_add</mat-icon>
 </button>
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let player of players$ | async"
+    ><span>{{ player.name }}</span
+    ><span>{{ player.symbol }}</span></mat-list-item
+  >
+</mat-list>

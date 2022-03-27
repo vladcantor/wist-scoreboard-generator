@@ -8,6 +8,9 @@ import { HomepageComponent } from './Pages/homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScoreBoardComponent } from './Pages/score-board/score-board.component';
 import { GameSettingsPageComponent } from './Pages/game-settings-page/game-settings-page.component';
+import { environment } from 'src/environments/environment';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { GameSettingsQuery, GameSettingsStore } from './store';
 
 @NgModule({
   declarations: [
@@ -21,8 +24,9 @@ import { GameSettingsPageComponent } from './Pages/game-settings-page/game-setti
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot({}),
   ],
-  providers: [],
+  providers: [GameSettingsQuery, GameSettingsStore],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
