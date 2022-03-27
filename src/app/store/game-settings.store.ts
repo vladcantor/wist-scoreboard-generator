@@ -2,6 +2,57 @@ import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { GameSettingsState } from './game-settings.state';
 import { WistGame } from './models';
+
+@Injectable()
+@StoreConfig({ name: 'gameSettings' })
+export class GameSettingsStore extends Store<GameSettingsState> {
+  constructor() {
+    super(createInitialState());
+  }
+
+  public setNewPlayerName(newPlayerName?: string) {
+    this.update((state) => {
+      return {
+        newPlayer: {
+          ...state.newPlayer,
+          name: newPlayerName ?? '',
+          symbol:
+            (newPlayerName?.length ?? 0) > 0
+              ? newPlayerName![0].toLocaleUpperCase()
+              : '',
+        },
+      };
+    });
+  }
+
+  public addNewPlayer(): void {
+    this.update((state) => {
+      return {
+        players: [...state.players, state.newPlayer],
+        newPlayer: {
+          name: '',
+          symbol: '',
+        },
+      };
+    });
+  }
+  public generateScoreBoard(): void {
+    this.update((state) => {
+      return {
+        initialScoreBoard: getScoreBoard(state),
+      };
+    });
+  }
+}
+
+const getNextPlayerIndex = (
+  playerCounter: number,
+  state: GameSettingsState
+) => {
+  playerCounter = (playerCounter + 1) % state.players.length;
+  return playerCounter;
+};
+
 function createInitialState(): GameSettingsState {
   return {
     areGamesOfOneIncluded: false,
@@ -65,48 +116,3 @@ const getGamesOfForEachPlayer = (
   }
   return result;
 };
-
-@Injectable()
-@StoreConfig({ name: 'gameSettings' })
-export class GameSettingsStore extends Store<GameSettingsState> {
-  constructor() {
-    super(createInitialState());
-  }
-
-  public setNewPlayerName(newPlayerName?: string) {
-    this.update((state) => {
-      return {
-        newPlayer: {
-          ...state.newPlayer,
-          name: newPlayerName ?? '',
-          symbol:
-            (newPlayerName?.length ?? 0) > 0
-              ? newPlayerName![0].toLocaleUpperCase()
-              : '',
-        },
-      };
-    });
-  }
-  public addNewPlayer(): void {
-    this.update((state) => {
-      return {
-        players: [...state.players, state.newPlayer],
-        newPlayer: {
-          name: '',
-          symbol: '',
-        },
-      };
-    });
-  }
-  public generateScoreBoard(): void {
-    this.update((state) => {
-      return {
-        initialScoreBoard: getScoreBoard(state),
-      };
-    });
-  }
-}
-function getNextPlayerIndex(playerCounter: number, state: GameSettingsState) {
-  playerCounter = (playerCounter + 1) % state.players.length;
-  return playerCounter;
-}

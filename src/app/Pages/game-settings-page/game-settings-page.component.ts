@@ -16,6 +16,7 @@ export class GameSettingsPageComponent {
   public addedPlayerName$ = this.query.newPlayerName$;
   public addedPlayerSymbol$ = this.query.newPlayerSymbol$;
   public isGameOfOneIncluded$ = this.query.areGamesOfOneIncluded$;
+  public canGenerate$ = this.query.canGenerateScoreBoard$;
   public onPlayerNameChanged(newName?: string) {
     this.store.setNewPlayerName(newName);
   }

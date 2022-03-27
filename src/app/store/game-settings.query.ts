@@ -11,6 +11,9 @@ export class GameSettingsQuery extends Query<GameSettingsState> {
   selectPlayers$ = this.select('players');
   newPlayerName$ = this.select((state) => state?.newPlayer?.name ?? '');
   newPlayerSymbol$ = this.select((state) => state?.newPlayer?.symbol ?? '');
+  canGenerateScoreBoard$ = this.select(
+    (state) => (state?.players?.length ?? 0) >= 4
+  );
 
   constructor(protected store: GameSettingsStore) {
     super(store);
