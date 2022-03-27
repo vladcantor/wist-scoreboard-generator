@@ -12,7 +12,7 @@ export class GameSettingsPageComponent {
     private store: GameSettingsStore
   ) {}
 
-  public players$ = this.query.selectPlayers$;
+  public players$ = this.query.allPlayers$;
   public addedPlayerName$ = this.query.newPlayerName$;
   public addedPlayerSymbol$ = this.query.newPlayerSymbol$;
   public isGameOfOneIncluded$ = this.query.areGamesOfOneIncluded$;

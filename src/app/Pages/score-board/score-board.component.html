@@ -1,1 +1,23 @@
-<p>score-board works!</p>
+<ng-container *ngIf="players$ | async as players">
+  <table class="table-container">
+    <thead class="header-container">
+      <tr class="header-row">
+        <th class="">Nr</th>
+        <th *ngFor="let player of players">
+          {{ player.name }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of scoreBoard$ | async">
+        <td class="game-identifier">
+          {{ game.numberOfCards }}{{ game.cardsDealer.symbol }}
+        </td>
+        <td class="score-registration" *ngFor="let player of players">
+          <div class="estimate"></div>
+          <div class="result"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

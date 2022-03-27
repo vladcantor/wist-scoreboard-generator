@@ -8,12 +8,13 @@ export class GameSettingsQuery extends Query<GameSettingsState> {
   areGamesOfOneIncluded$ = this.select(
     (state) => state.areGamesOfOneIncluded ?? true
   );
-  selectPlayers$ = this.select('players');
+  allPlayers$ = this.select('players');
   newPlayerName$ = this.select((state) => state?.newPlayer?.name ?? '');
   newPlayerSymbol$ = this.select((state) => state?.newPlayer?.symbol ?? '');
   canGenerateScoreBoard$ = this.select(
     (state) => (state?.players?.length ?? 0) >= 4
   );
+  allGames$ = this.select((state) => state.initialScoreBoard);
 
   constructor(protected store: GameSettingsStore) {
     super(store);

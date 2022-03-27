@@ -1,0 +1,39 @@
+:host {
+  table {
+    border: 1px solid black;
+    border-spacing: 0;
+    tr {
+      margin: 0;
+      padding: 0;
+
+      .game-identifier {
+        border: 1px solid black;
+        border-spacing: 0;
+        width: 3em;
+        text-align: center;
+      }
+
+      .score-registration {
+        border: 1px solid black;
+        border-spacing: 0;
+        margin: 0;
+        padding: 0;
+        width: 6em;
+
+        .estimate {
+          border: 1px solid black;
+          margin: auto;
+          padding: 0;
+          display: inline-block;
+        }
+
+        .result {
+          border: 1px solid black;
+          margin: auto;
+          padding: 0;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

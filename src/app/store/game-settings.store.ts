@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { GameSettingsState } from './game-settings.state';
 import { WistGame } from './models';
+import { Router } from '@angular/router';
 
 @Injectable()
 @StoreConfig({ name: 'gameSettings' })
 export class GameSettingsStore extends Store<GameSettingsState> {
-  constructor() {
+  constructor(private router: Router) {
     super(createInitialState());
   }
 
@@ -38,6 +39,7 @@ export class GameSettingsStore extends Store<GameSettingsState> {
   }
   public generateScoreBoard(): void {
     this.update((state) => {
+      this.router.navigate(['score-board']);
       return {
         initialScoreBoard: getScoreBoard(state),
       };
