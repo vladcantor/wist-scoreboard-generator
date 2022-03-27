@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { GameSettingsState } from './game-settings.state';
+import { WistGame } from './models';
 function createInitialState(): GameSettingsState {
   return {
     areGamesOfOneIncluded: false,
@@ -9,8 +10,61 @@ function createInitialState(): GameSettingsState {
       name: '',
       symbol: '',
     },
+    initialScoreBoard: [],
   };
 }
+const getScoreBoard = (state: GameSettingsState) => {
+  if (state.players.length < 1) {
+    return [];
+  }
+
+  let result: WistGame[] = [];
+  if (state.areGamesOfOneIncluded) {
+    result = getGamesOfForEachPlayer(state, 1, 0);
+  }
+
+  let playerCounter = 0;
+  for (let i = 2; i < 8; i++) {
+    result.push({
+      cardsDealer: state.players[playerCounter],
+      numberOfCards: i,
+    });
+    playerCounter = getNextPlayerIndex(playerCounter, state);
+  }
+
+  result = result.concat(getGamesOfForEachPlayer(state, 8, playerCounter));
+
+  for (let i = 7; i >= 2; i--) {
+    result.push({
+      cardsDealer: state.players[playerCounter],
+      numberOfCards: i,
+    });
+    playerCounter = getNextPlayerIndex(playerCounter, state);
+  }
+
+  if (state.areGamesOfOneIncluded) {
+    result = result.concat(getGamesOfForEachPlayer(state, 1, playerCounter));
+  }
+  return result;
+};
+
+const getGamesOfForEachPlayer = (
+  state: GameSettingsState,
+  numberOfCards: number,
+  startingIndex: number
+): WistGame[] => {
+  const result: WistGame[] = [];
+  let index = 0;
+  while (index < state.players.length) {
+    index++;
+    result.push({
+      cardsDealer: state.players[startingIndex],
+      numberOfCards: numberOfCards,
+    });
+    startingIndex = getNextPlayerIndex(startingIndex, state);
+  }
+  return result;
+};
 
 @Injectable()
 @StoreConfig({ name: 'gameSettings' })
@@ -44,4 +98,15 @@ export class GameSettingsStore extends Store<GameSettingsState> {
       };
     });
   }
+  public generateScoreBoard(): void {
+    this.update((state) => {
+      return {
+        initialScoreBoard: getScoreBoard(state),
+      };
+    });
+  }
+}
+function getNextPlayerIndex(playerCounter: number, state: GameSettingsState) {
+  playerCounter = (playerCounter + 1) % state.players.length;
+  return playerCounter;
 }

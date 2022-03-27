@@ -31,4 +31,8 @@ export class GameSettingsPageComponent {
   public onAddPlayer(): void {
     this.store.addNewPlayer();
   }
+
+  public onGenerateScoreBoard(): void {
+    this.store.generateScoreBoard();
+  }
 }
