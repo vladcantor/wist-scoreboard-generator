@@ -17,7 +17,7 @@ export class GameSettingsStore extends Store<GameSettingsState> {
         newPlayer: {
           ...state.newPlayer,
           name: newPlayerName ?? '',
-          symbol:
+          playerIdentifier:
             (newPlayerName?.length ?? 0) > 0
               ? newPlayerName![0].toLocaleUpperCase()
               : '',
@@ -32,7 +32,7 @@ export class GameSettingsStore extends Store<GameSettingsState> {
         players: [...state.players, state.newPlayer],
         newPlayer: {
           name: '',
-          symbol: '',
+          playerIdentifier: '',
         },
       };
     });
@@ -42,6 +42,22 @@ export class GameSettingsStore extends Store<GameSettingsState> {
       this.router.navigate(['score-board']);
       return {
         initialScoreBoard: getScoreBoard(state),
+      };
+    });
+  }
+
+  public deletePlayer(playerIdentifier?: string) {
+    if (!playerIdentifier) {
+      return;
+    }
+
+    this.update((state) => {
+      return {
+        players: [
+          ...state.players.filter(
+            (player) => player.playerIdentifier !== playerIdentifier
+          ),
+        ],
       };
     });
   }
@@ -61,7 +77,7 @@ function createInitialState(): GameSettingsState {
     players: [],
     newPlayer: {
       name: '',
-      symbol: '',
+      playerIdentifier: '',
     },
     initialScoreBoard: [],
   };

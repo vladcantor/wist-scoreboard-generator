@@ -1,39 +1,61 @@
-<mat-checkbox
-  matInput
-  placeholder="New Player Name"
-  [checked]="(isGameOfOneIncluded$ | async) ?? false"
-  (change)="onIncludeGamesOfOneChanged($event.checked)"
-  >Should Include Games of One?</mat-checkbox
->
-<mat-form-field appearance="fill">
-  <mat-label>Player Name</mat-label>
-  <input
+<div class="new-player-fields">
+  <mat-form-field class="player-name form-field" appearance="fill">
+    <mat-label>Player Name</mat-label>
+    <input
+      matInput
+      placeholder="New Player Name"
+      #playerName
+      [value]="addedPlayerName$ | async"
+      (input)="onPlayerNameChanged(playerName.value)"
+    />
+  </mat-form-field>
+  <mat-form-field class="player-identifier form-field" appearance="fill">
+    <mat-label>Player Symbol</mat-label>
+    <input
+      matInput
+      placeholder="New Player Identifier"
+      #playerSymbol
+      [value]="addedPlayerSymbol$ | async"
+      disabled
+    />
+  </mat-form-field>
+  <button
+    mat-fab
+    color="primary"
+    class="add-player-button"
+    (click)="onAddPlayer()"
+    [disabled]="((isPlayerValid$ | async) ?? false) === false"
+  >
+    <mat-icon>person_add</mat-icon>
+  </button>
+</div>
+<mat-list role="list" class="players-list display-flex-and-center">
+  <mat-list-item role="listitem" *ngFor="let player of players$ | async">
+    <mat-card>
+      <mat-card-title>{{ player.name }}</mat-card-title>
+      <mat-card-subtitle>{{ player.playerIdentifier }}</mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-button (click)="onPlayerDeleted(player.playerIdentifier)">
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-list-item>
+</mat-list>
+<div class="page-actions display-flex-and-center">
+  <mat-checkbox
     matInput
     placeholder="New Player Name"
-    #playerName
-    [value]="addedPlayerName$ | async"
-    (input)="onPlayerNameChanged(playerName.value)"
-  />
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Player Symbol</mat-label>
-  <input
-    matInput
-    placeholder="New Player Symbol"
-    #playerSymbol
-    [value]="addedPlayerSymbol$ | async"
-    disabled
-  />
-</mat-form-field>
-<button mat-fab color="primary" (click)="onAddPlayer()">
-  <mat-icon>person_add</mat-icon>
-</button>
-<mat-list role="list">
-  <mat-list-item role="listitem" *ngFor="let player of players$ | async"
-    ><span>{{ player.name }}</span
-    ><span>{{ player.symbol }}</span></mat-list-item
+    [checked]="(isGameOfOneIncluded$ | async) ?? false"
+    (change)="onIncludeGamesOfOneChanged($event.checked)"
+    >Should Include Games of One?</mat-checkbox
   >
-</mat-list>
-<button mat-fab color="primary" (click)="onGenerateScoreBoard()" [disabled]="(canGenerate$ | async) === false">
-  <mat-icon>construction</mat-icon>
-</button>
+  <button
+    mat-fab
+    color="primary"
+    (click)="onGenerateScoreBoard()"
+    [disabled]="(canGenerate$ | async) === false"
+  >
+    <mat-icon>construction</mat-icon>
+  </button>
+</div>

@@ -17,6 +17,7 @@ export class GameSettingsPageComponent {
   public addedPlayerSymbol$ = this.query.newPlayerSymbol$;
   public isGameOfOneIncluded$ = this.query.areGamesOfOneIncluded$;
   public canGenerate$ = this.query.canGenerateScoreBoard$;
+  public isPlayerValid$ = this.query.isPlayerValid$;
   public onPlayerNameChanged(newName?: string) {
     this.store.setNewPlayerName(newName);
   }
@@ -35,5 +36,9 @@ export class GameSettingsPageComponent {
 
   public onGenerateScoreBoard(): void {
     this.store.generateScoreBoard();
+  }
+
+  public onPlayerDeleted(playerIdentifier: string) {
+    this.store.deletePlayer(playerIdentifier);
   }
 }
