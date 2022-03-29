@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'game', component: GameSettingsPageComponent },
   { path: 'score-board', component: ScoreBoardComponent },
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({
