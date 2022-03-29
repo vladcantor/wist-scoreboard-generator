@@ -2,7 +2,7 @@
   <table class="table-container">
     <thead class="header-container">
       <tr class="header-row">
-        <th class="">Nr</th>
+        <th>Nr</th>
         <th *ngFor="let player of players">
           {{ player.name }}
         </th>
@@ -14,8 +14,10 @@
           {{ game.numberOfCards }}{{ game.cardsDealer.playerIdentifier }}
         </td>
         <td class="score-registration" *ngFor="let player of players">
-          <div class="estimate"></div>
-          <div class="result"></div>
+          <div class="inner-container">
+            <div class="estimate"></div>
+            <div class="result"></div>
+          </div>
         </td>
       </tr>
     </tbody>

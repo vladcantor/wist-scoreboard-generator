@@ -1,37 +1,52 @@
+@import "mixins";
+
 :host {
-  table {
+  .table-border {
     border: 1px solid black;
     border-spacing: 0;
+  }
+  table {
+    @extend .table-border;
+
     tr {
       margin: 0;
       padding: 0;
 
+      th {
+        @extend .table-border;
+      }
+
       .game-identifier {
-        border: 1px solid black;
-        border-spacing: 0;
+        @extend .table-border;
         width: 3em;
         text-align: center;
       }
 
       .score-registration {
-        border: 1px solid black;
-        border-spacing: 0;
         margin: 0;
         padding: 0;
-        width: 6em;
 
-        .estimate {
-          border: 1px solid black;
-          margin: auto;
-          padding: 0;
-          display: inline-block;
-        }
+        .inner-container {
+          width: 6em;
+          height: 2em;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr;
+          box-sizing: border-box;
+          @extend .table-border;
 
-        .result {
-          border: 1px solid black;
-          margin: auto;
-          padding: 0;
-          display: inline-block;
+          .game-score {
+            padding: 0;
+            display: inline-block;
+          }
+          .estimate {
+            @extend .game-score;
+            border-right: 1px solid black;
+          }
+
+          .result {
+            @extend .game-score;
+          }
         }
       }
     }
