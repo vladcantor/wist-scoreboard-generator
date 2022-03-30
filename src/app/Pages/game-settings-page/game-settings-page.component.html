@@ -1,0 +1,64 @@
+<div class="page-container">
+  <div class="new-player-fields">
+    <mat-form-field class="player-name form-field" appearance="fill">
+      <mat-label i18n>Player Name</mat-label>
+      <input
+        matInput
+        i18n-placeholder
+        placeholder="New Player Name"
+        #playerName
+        [value]="addedPlayerName$ | async"
+        (input)="onPlayerNameChanged(playerName.value)"
+      />
+    </mat-form-field>
+    <mat-form-field class="player-identifier form-field" appearance="fill">
+      <mat-label i18n>Player Symbol</mat-label>
+      <input
+        matInput
+        i18n-placeholder="New Player Identifier"
+        #playerSymbol
+        [value]="addedPlayerSymbol$ | async"
+        disabled
+      />
+    </mat-form-field>
+    <button
+      mat-fab
+      color="primary"
+      class="add-player-button"
+      (click)="onAddPlayer()"
+      [disabled]="((isPlayerValid$ | async) ?? false) === false"
+    >
+      <mat-icon>person_add</mat-icon>
+    </button>
+  </div>
+  <div class="players-list">
+    <mat-card class="player-card" *ngFor="let player of players$ | async">
+      <mat-card-title>{{ player.name }}</mat-card-title>
+      <mat-card-subtitle>{{ player.playerIdentifier }}</mat-card-subtitle>
+      <mat-card-actions>
+        <button i18n mat-button (click)="onPlayerDeleted(player.playerIdentifier)">
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="page-actions display-flex-and-center">
+    <mat-checkbox
+      matInput
+      i18n
+      placeholder="New Player Name"
+      [checked]="(isGameOfOneIncluded$ | async) ?? false"
+      (change)="onIncludeGamesOfOneChanged($event.checked)"
+      >Should Include Games of One?</mat-checkbox
+    >
+    <button
+      mat-fab
+      color="primary"
+      (click)="onGenerateScoreBoard()"
+      [disabled]="(canGenerate$ | async) === false"
+      class="generate-button"
+    >
+      <mat-icon>construction</mat-icon>
+    </button>
+  </div>
+</div>

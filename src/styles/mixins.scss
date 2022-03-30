@@ -1,0 +1,16 @@
+@mixin display-flex-and-flex-item($flex) {
+  display: flex;
+  @include flex-item($flex);
+}
+
+@mixin flex-item($flex) {
+  flex: $flex;
+  @include ensure-size;
+}
+
+@mixin ensure-size {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 100%;
+}

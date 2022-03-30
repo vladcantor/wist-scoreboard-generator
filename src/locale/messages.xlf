@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="7408681291621365060" datatype="html">
+        <source>Player Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/game-settings-page/game-settings-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7122970525994641924" datatype="html">
+        <source>New Player Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/game-settings-page/game-settings-page.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2885466067398433706" datatype="html">
+        <source>Player Symbol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/game-settings-page/game-settings-page.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/game-settings-page/game-settings-page.component.html</context>
+          <context context-type="linenumber">40,41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6624423216013153929" datatype="html">
+        <source>Should Include Games of One?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/game-settings-page/game-settings-page.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="constructionHomepage" datatype="html">
+        <source> Generate scoreboard for card game wist. All you have to do is to input the players and game options </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Pages/homepage/homepage.component.html</context>
+          <context context-type="linenumber">5,8</context>
+        </context-group>
+        <note priority="1" from="description">Description for the main page</note>
+        <note priority="1" from="meaning">Description</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

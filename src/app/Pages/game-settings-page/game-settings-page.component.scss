@@ -1,0 +1,49 @@
+@import "mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+  max-height: 100%;
+
+  .page-container {
+    .component-spacing {
+      margin: 8px;
+    }
+
+    .new-player-fields {
+      @include display-flex-and-flex-item(1 1 auto);
+      flex-direction: row;
+
+      .form-field {
+        @extend .component-spacing;
+      }
+      .add-player-button {
+        @extend .component-spacing;
+      }
+    }
+    .players-list {
+      @include display-flex-and-flex-item(1);
+
+      .player-card {
+        @extend .component-spacing;
+      }
+    }
+
+    .generate-button {
+      @extend .component-spacing;
+    }
+
+    .display-flex-and-center {
+      @include display-flex-and-flex-item(1 1 auto);
+      justify-content: center;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

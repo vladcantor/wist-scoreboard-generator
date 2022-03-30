@@ -1,0 +1,63 @@
+@import "mixins";
+
+:host {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .score-board-page {
+    .table-border {
+      border: 1px solid black;
+      border-spacing: 0;
+    }
+    table {
+      @extend .table-border;
+
+      tr {
+        margin: 0;
+        padding: 0;
+
+        th {
+          @extend .table-border;
+        }
+
+        .game-identifier {
+          @extend .table-border;
+          width: 3em;
+          text-align: center;
+        }
+
+        .score-registration {
+          margin: 0;
+          padding: 0;
+
+          .inner-container {
+            width: 6em;
+            height: 2em;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            box-sizing: border-box;
+            @extend .table-border;
+
+            .game-score {
+              padding: 0;
+              display: inline-block;
+            }
+            .estimate {
+              @extend .game-score;
+              border-right: 1px solid black;
+            }
+
+            .result {
+              @extend .game-score;
+            }
+          }
+        }
+      }
+    }
+  }
+}
