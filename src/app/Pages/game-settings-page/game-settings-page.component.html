@@ -1,9 +1,10 @@
 <div class="page-container">
   <div class="new-player-fields">
     <mat-form-field class="player-name form-field" appearance="fill">
-      <mat-label>Player Name</mat-label>
+      <mat-label i18n>Player Name</mat-label>
       <input
         matInput
+        i18n-placeholder
         placeholder="New Player Name"
         #playerName
         [value]="addedPlayerName$ | async"
@@ -11,10 +12,10 @@
       />
     </mat-form-field>
     <mat-form-field class="player-identifier form-field" appearance="fill">
-      <mat-label>Player Symbol</mat-label>
+      <mat-label i18n>Player Symbol</mat-label>
       <input
         matInput
-        placeholder="New Player Identifier"
+        i18n-placeholder="New Player Identifier"
         #playerSymbol
         [value]="addedPlayerSymbol$ | async"
         disabled
@@ -35,7 +36,7 @@
       <mat-card-title>{{ player.name }}</mat-card-title>
       <mat-card-subtitle>{{ player.playerIdentifier }}</mat-card-subtitle>
       <mat-card-actions>
-        <button mat-button (click)="onPlayerDeleted(player.playerIdentifier)">
+        <button i18n mat-button (click)="onPlayerDeleted(player.playerIdentifier)">
           Delete
         </button>
       </mat-card-actions>
@@ -44,6 +45,7 @@
   <div class="page-actions display-flex-and-center">
     <mat-checkbox
       matInput
+      i18n
       placeholder="New Player Name"
       [checked]="(isGameOfOneIncluded$ | async) ?? false"
       (change)="onIncludeGamesOfOneChanged($event.checked)"
